@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>THUBALESHA – Autoplay Video</title>
+  <style>
+    body{background:#000;color:#fff;font-family:sans-serif;text-align:center;padding:20px}
+    h1{margin-bottom:20px}
+    #player{max-width:640px;margin:0 auto}
+    iframe{width:100%;height:360px;border:none;border-radius:12px}
+  </style>
+</head>
+<body>
+
+  <h1>Welcome to THUBALESHA</h1>
+
+  <!-- Change only the data-url if you ever swap videos -->
+  <div id="player" data-url="https://youtu.be/SpQ-SxkO98M?si=zoobK8RmDALgFHcg"></div>
+
+  <script>
+    // ── Build an autoplay + muted embed ───────────────────────────
+    const box   = document.getElementById('player');
+    const url   = box.dataset.url.trim();
+    const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/))([A-Za-z0-9_-]{11})/);
+
+    if(!match){
+      box.innerHTML = "<p style='color:red'>Invalid YouTube URL</p>";
+    }else{
+      const id      = match[1];
+      const params  = "autoplay=1&playsinline=1&mute=1&controls=1&modestbranding=1&rel=0";
+      const src     = `https://www.youtube.com/embed/${id}?${params}`;
+
+      box.innerHTML =
+        `<iframe src="${src}"
+                 title="THUBALESHA Video"
+                 allow="autoplay; encrypted-media"
+                 allowfullscreen
+                 oncontextmenu="return false"></iframe>`;
+    }
+  </script>
+
+</body>
+</html>
